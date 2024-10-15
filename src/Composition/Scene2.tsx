@@ -1,38 +1,204 @@
-import { AbsoluteFill} from 'remotion';
+import { AbsoluteFill, Img, useVideoConfig } from 'remotion';
 
 import { z } from 'zod';
-import Image from '../components/Image';
-import Logo from '../components/Logo';
-import { Background } from '../components/Background';
 import { BackgroundProps } from '../backgrounds';
+import CircleGrid from '../components/CircleGrid';
+import RectWithSideLines from '../components/RectWithSideLines';
+import SweepComponent from '../components/SweepComponent';
+import { Background } from '../components/Background';
+import { useTextSplitter } from '../lib/useTextSplitter';
+import { TextCharsRandomOpacity } from '../components/animations/TextCharsRandomOpacity';
 import { colorVar } from '../lib/helpers';
-
+import OverlappingSquares from '../components/OverlappingSquares';
+import AnimatedOutlinedCircle from '../components/AnimatedOutlineCircle';
+import FilledCircle from '../components/FilledCirlcle';
 
 export const scene2Schema = z.object({
   logo: z.string(),
   img: z.string(),
+  img2: z.string(),
+  title: z.string(),
 });
 type Scene2Props = z.infer<typeof scene2Schema> & { background: BackgroundProps };
 
 const Scene2: React.FC<Scene2Props> = (props) => {
-
-
+  const { width, height } = useVideoConfig();
+  const circleRadius = Math.min(width, height) * 0.35;
+  const titleSplit = useTextSplitter({
+    text: props.title,
+    fontSize: 100,
+    fontWeight: '800',
+    letterSpacing: '6px',
+    maxLines: 4,
+    maxWidth: 900,
+  });
   return (
     <AbsoluteFill>
-      <Background {...props.background} />
-      <div
-        style={{
-          display: 'flex',
-          margin: '100px',
-          paddingTop: '100px',
-          justifyContent: 'space-between',
-        }}
-      >
-        <div>
-          <Logo logo={props.logo} radius={180} />
+      <SweepComponent>
+        <Background {...props.background} />
+        <AbsoluteFill>
+          <FilledCircle
+            x={width / 6}
+            y={height / 8}
+            beginRadius={400}
+            endRadius={600}
+            height={height}
+            width={width}
+            color="#18FFFF"
+          />
+        </AbsoluteFill>
+        <AbsoluteFill
+          style={{
+            left: '30%',
+            clipPath: 'url(#clip-2)',
+          }}
+        >
+          <Img
+            src={props.img2}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+        </AbsoluteFill>
+        <AbsoluteFill
+          style={{
+            width: '50%',
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
+            left: '-10%',
+            bottom: '-18%',
+            clipPath: 'url(#clip)',
+          }}
+        >
+          <Img
+            src={props.img}
+            style={{
+              width: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+            }}
+          />
+        </AbsoluteFill>
+        <AbsoluteFill>
+          <RectWithSideLines
+            width={width}
+            height={height}
+            sideLineLength={80}
+            paddingX={100}
+            paddingY={55}
+            color={colorVar('secondary')}
+          />
+        </AbsoluteFill>
+
+        <div
+          style={{
+            ...titleSplit.style,
+            position: 'absolute',
+            left: '7%',
+            top: '10%',
+          }}
+        >
+          <TextCharsRandomOpacity text={titleSplit.text} color={colorVar('primaryText')} />
         </div>
-        <Image img={props.img} radius={400} strokeColor={colorVar("secondary")} strokeWidth={50} />
-      </div>
+        <AbsoluteFill>
+          <OverlappingSquares
+            size={60}
+            overlapFactor={0.7}
+            position="bottom-left"
+            fraction={0.8}
+            strokeWidth={5}
+            width={width}
+            height={height}
+            x={width / 2.7}
+            y={height / 2}
+            renderOrder="foreground"
+            fillColor={colorVar('accent')}
+            strokeColor="#1997DD"
+          />
+        </AbsoluteFill>
+        <AbsoluteFill>
+          <OverlappingSquares
+            size={60}
+            overlapFactor={0.7}
+            position="top-right"
+            fraction={0.8}
+            strokeWidth={5}
+            width={width}
+            height={height}
+            x={width * 0.8}
+            y={height * 0.85}
+            renderOrder="foreground"
+            fillColor={colorVar('accent')}
+            strokeColor="#1997DD"
+          />
+        </AbsoluteFill>
+        <AbsoluteFill>
+          <CircleGrid
+            gap={20}
+            strokeWidth={2}
+            color={colorVar('secondary')}
+            beginRadius={180}
+            endRadius={180}
+            width={width}
+            height={height}
+            x={840}
+            y={260}
+            clipId="scene-2-clip-1"
+          />
+        </AbsoluteFill>
+
+        <AbsoluteFill>
+          <CircleGrid
+            gap={20}
+            strokeWidth={2}
+            color={colorVar('accent')}
+            beginRadius={0}
+            endRadius={60}
+            width={width}
+            height={height}
+            x={width * 0.7}
+            y={height * 0.2}
+            clipId="scene-2-clip-2"
+          />
+        </AbsoluteFill>
+        <AbsoluteFill>
+          <CircleGrid
+            gap={20}
+            strokeWidth={2}
+            color={colorVar('secondary')}
+            beginRadius={0}
+            endRadius={40}
+            width={width}
+            height={height}
+            x={width * 0.9}
+            y={height * 0.75}
+            clipId="scene-2-clip-3"
+          />
+        </AbsoluteFill>
+        <AbsoluteFill>
+          <AnimatedOutlinedCircle
+            width={width}
+            height={height}
+            x={width}
+            y={height / 2}
+            color="#093399"
+            strokeWidth={40}
+            radius={40}
+            rotation={60}
+          />
+        </AbsoluteFill>
+      </SweepComponent>
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+        <clipPath id="clip">
+          <circle cx={circleRadius * 1.3} cy={height - circleRadius / 4} r={circleRadius} />
+        </clipPath>
+        <clipPath id="clip-2">
+          <rect x="20%" width="100%" height="100%" fill="red" />
+        </clipPath>
+      </svg>
     </AbsoluteFill>
   );
 };
