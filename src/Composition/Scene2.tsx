@@ -1,4 +1,12 @@
-import { AbsoluteFill, Img, useVideoConfig } from 'remotion';
+import {
+  AbsoluteFill,
+  Img,
+  useVideoConfig,
+  Audio,
+  spring,
+  useCurrentFrame,
+  interpolate,
+} from 'remotion';
 
 import { z } from 'zod';
 import { BackgroundProps } from '../backgrounds';
@@ -18,11 +26,13 @@ export const scene2Schema = z.object({
   img: z.string(),
   img2: z.string(),
   title: z.string(),
+  voiceOver: z.string(),
 });
 type Scene2Props = z.infer<typeof scene2Schema> & { background: BackgroundProps };
 
 const Scene2: React.FC<Scene2Props> = (props) => {
-  const { width, height } = useVideoConfig();
+  const { width, height, fps, durationInFrames } = useVideoConfig();
+  const frame = useCurrentFrame();
   const circleRadius = Math.min(width, height) * 0.35;
   const titleSplit = useTextSplitter({
     text: props.title,
@@ -32,8 +42,47 @@ const Scene2: React.FC<Scene2Props> = (props) => {
     maxLines: 4,
     maxWidth: 900,
   });
+
+  const zoom = spring({
+    frame,
+    fps,
+    from: 1,
+    to: 1.2,
+    durationInFrames,
+    config: {
+      damping: 200,
+    },
+  });
+
+  const zoom2 = spring({
+    frame,
+    fps,
+    from: 1,
+    to: 1.2,
+    durationInFrames,
+    config: {
+      damping: 200,
+    },
+  });
+
+  const slide = spring({
+    frame,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames,
+    config: {
+      damping: 200,
+    },
+  });
+
+  // Calculate the horizontal translation
+  const translateX = interpolate(slide, [0, 1], [0, -100]);
+
   return (
-    <AbsoluteFill>
+    <AbsoluteFill style={{ overflow: 'hidden' }}>
+      <Audio src={props.voiceOver} />
+
       <SweepComponent>
         <Background {...props.background} />
         <AbsoluteFill>
@@ -47,10 +96,24 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             color="#18FFFF"
           />
         </AbsoluteFill>
+        <AbsoluteFill>
+          <FilledCircle
+            x={circleRadius * 0.9}
+            y={height - circleRadius / 4}
+            beginRadius={circleRadius * 0.8}
+            endRadius={circleRadius * 1.1}
+            height={height}
+            width={width}
+            color="#093399"
+          />
+        </AbsoluteFill>
+
         <AbsoluteFill
           style={{
             left: '30%',
             clipPath: 'url(#clip-2)',
+            overflow: 'hidden',
+            transform: `translateX(${translateX}px)`,
           }}
         >
           <Img
@@ -59,6 +122,8 @@ const Scene2: React.FC<Scene2Props> = (props) => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
+              transform: `scale(${zoom})`,
+              transformOrigin: 'center center',
             }}
           />
         </AbsoluteFill>
@@ -79,6 +144,7 @@ const Scene2: React.FC<Scene2Props> = (props) => {
               width: '100%',
               objectFit: 'cover',
               objectPosition: 'center',
+              transform: `scale(${zoom2})`,
             }}
           />
         </AbsoluteFill>

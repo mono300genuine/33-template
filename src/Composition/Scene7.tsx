@@ -1,52 +1,197 @@
-import { AbsoluteFill, Img } from 'remotion';
+import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig, Audio } from 'remotion';
 import { z } from 'zod';
-import Circle from '../components/Circle';
-import { BackgroundProps } from '../backgrounds';
 import { Background } from '../components/Background';
-import { HEIGHT, WIDTH } from '../lib/consts';
+import { BackgroundProps } from '../backgrounds';
 import { colorVar } from '../lib/helpers';
+import CircleGrid from '../components/CircleGrid';
+import OverlappingSquares from '../components/OverlappingSquares';
+import RectWithSideLines from '../components/RectWithSideLines';
+import SweepComponent from '../components/SweepComponent';
+import { TextCharsRandomOpacity } from '../components/animations/TextCharsRandomOpacity';
+import { useTextSplitter } from '../lib/useTextSplitter';
 
 export const scene7Schema = z.object({
-  logo: z.string(),
+  img: z.string(),
+  title: z.string(),
+  subtitle: z.string(),
+  voiceOver: z.string(),
 });
 
-type Scene7Props = z.infer<typeof scene7Schema> & { background: BackgroundProps };
+type Scene7Props = z.infer<typeof scene7Schema> & {
+  background: BackgroundProps;
+};
 
 const Scene7: React.FC<Scene7Props> = (props) => {
+  const { width, height, durationInFrames } = useVideoConfig();
+  const frame = useCurrentFrame();
+  const titleText = useTextSplitter({
+    text: props.title,
+    fontSize: 100,
+    fontWeight: '800',
+    letterSpacing: '6px',
+    maxLines: 4,
+    maxWidth: 700,
+  });
+
+  const subtitleText = useTextSplitter({
+    text: props.subtitle,
+    fontSize: 70,
+    fontWeight: '800',
+    letterSpacing: '6px',
+    maxLines: 4,
+    maxWidth: 700,
+  });
+
+  const cx = width / 2;
+  const cy = height;
+
+  const radius = 80;
+  const strokeDasharray = 2 * Math.PI * radius;
+  const strokeDashoffset = interpolate(
+    frame,
+    [0, Math.floor(durationInFrames * 0.9)],
+    [strokeDasharray, 0],
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    }
+  );
+  const x = width * 0.75;
+  const y = 0;
+  const rotation = -60;
+
+  const zoomScale = interpolate(frame, [0, durationInFrames], [1.15, 1], {
+    extrapolateRight: 'clamp',
+  });
+
   return (
-    <AbsoluteFill style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Background {...props.background} />
-      <div
-        style={{
-          position: 'relative',
-          width: WIDTH,
-          height: HEIGHT,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          overflow: 'hidden',
-        }}
-      >
-        <Img src={props.logo} width={500} />
+    <AbsoluteFill>
+      <Audio src={props.voiceOver} />
+
+      <SweepComponent>
+        <Background {...props.background} />
+        <AbsoluteFill>
+          <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+            <defs>
+              <clipPath id="circleClip">
+                <circle cx={cx} cy={cy} r={600} />
+              </clipPath>
+            </defs>
+            <circle cx={cx * 0.9} cy={cy} r={580} fill={'#31b3fe'} />
+
+            <image
+              href={props.img}
+              x={cx - (width * zoomScale) / 2}
+              y={cy - (height * zoomScale) / 1.5}
+              width={width * zoomScale}
+              height={height * zoomScale}
+              preserveAspectRatio="xMidYMid slice"
+              clip-path="url(#circleClip)"
+            />
+
+            <circle
+              cx={x}
+              cy={y}
+              r={radius}
+              fill="none"
+              stroke={'#093399'}
+              width={width}
+              height={height}
+              color="#093399"
+              strokeWidth={60}
+              strokeDasharray={strokeDasharray}
+              strokeDashoffset={strokeDashoffset}
+              strokeLinecap="square"
+              transform={`rotate(${rotation} ${x} ${y})`}
+            />
+          </svg>
+        </AbsoluteFill>
+
+        <AbsoluteFill>
+          <RectWithSideLines
+            width={width}
+            height={height}
+            sideLineLength={80}
+            paddingX={100}
+            paddingY={55}
+            color={colorVar('secondary')}
+          />
+        </AbsoluteFill>
+
         <div
           style={{
+            ...titleText.style,
             position: 'absolute',
-            top: 0,
-            left: 0,
+            left: '10%',
+            top: '10%',
           }}
         >
-          <Circle radius={200} strokeColor={colorVar('secondary')} strokeWidth={40} />
+          <TextCharsRandomOpacity text={titleText.text} color={colorVar('primaryText')} />
+          <TextCharsRandomOpacity text={subtitleText.text} color={colorVar('primaryText')} />
         </div>
-        <div
-          style={{
-            position: 'absolute',
-            right: 0,
-            bottom: 0,
-          }}
-        >
-          <Circle radius={200} strokeColor={colorVar('secondary')} strokeWidth={40} />
-        </div>
-      </div>
+        <AbsoluteFill>
+          <OverlappingSquares
+            size={60}
+            overlapFactor={0.7}
+            position="bottom-left"
+            fraction={0.8}
+            strokeWidth={5}
+            width={width}
+            height={height}
+            x={width * 0.91}
+            y={height * 0.063}
+            renderOrder="foreground"
+            fillColor={colorVar('accent')}
+            strokeColor="#1997DD"
+          />
+        </AbsoluteFill>
+        <AbsoluteFill>
+          <OverlappingSquares
+            size={60}
+            overlapFactor={0.7}
+            position="top-right"
+            fraction={0.8}
+            strokeWidth={5}
+            width={width}
+            height={height}
+            x={width * 0.06}
+            y={height * 0.7}
+            renderOrder="foreground"
+            fillColor={colorVar('accent')}
+            strokeColor="#1997DD"
+          />
+        </AbsoluteFill>
+
+        <AbsoluteFill>
+          <CircleGrid
+            gap={20}
+            strokeWidth={2}
+            color={colorVar('secondary')}
+            beginRadius={0}
+            endRadius={70}
+            width={width}
+            height={height}
+            x={width * 0.51}
+            y={height * 0.35}
+            clipId="scene-7-clip-2"
+          />
+        </AbsoluteFill>
+        <AbsoluteFill>
+          <CircleGrid
+            gap={20}
+            strokeWidth={2}
+            color={colorVar('accent')}
+            beginRadius={0}
+            endRadius={200}
+            width={width}
+            direction="vertical"
+            height={height}
+            x={width * 0.8}
+            y={height * 0.65}
+            clipId="scene-7-clip-3"
+          />
+        </AbsoluteFill>
+      </SweepComponent>
     </AbsoluteFill>
   );
 };

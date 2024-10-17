@@ -1,4 +1,4 @@
-import { AbsoluteFill, Img, useCurrentFrame, useVideoConfig } from 'remotion';
+import { AbsoluteFill, Img, useCurrentFrame, useVideoConfig, Audio, Sequence } from 'remotion';
 import { z } from 'zod';
 import { BackgroundProps } from '../backgrounds';
 import RectWithSideLines from '../components/RectWithSideLines';
@@ -7,29 +7,25 @@ import CircleOutline from '../components/CircleOutline';
 import AnimatedOutlinedCircle from '../components/AnimatedOutlineCircle';
 import SweepComponent from '../components/SweepComponent';
 import { colorVar, defaultSpring } from '../lib/helpers';
+import { Background } from '../components/Background';
 
 export const scene1Schema = z.object({
   logo: z.string(),
-  image: z.string(),
+  voiceOver: z.string(),
 });
 type Scene1Props = z.infer<typeof scene1Schema> & { background: BackgroundProps };
 
 const Scene1: React.FC<Scene1Props> = (props) => {
   const { width, height } = useVideoConfig();
-  const frame = useCurrentFrame();
 
   return (
-    <AbsoluteFill>
+    <AbsoluteFill style={{ overflow: 'hidden' }}>
+      <Sequence from={10}>
+        <Audio src={props.voiceOver} />
+      </Sequence>
+
       <SweepComponent>
-        <Img
-          src={props.image}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
-        />
-        <AbsoluteFill style={{ backgroundColor: 'yellow', opacity: 0.3 }} />
+        <Background {...props.background} />
 
         <AbsoluteFill>
           <CircleOutline
@@ -53,8 +49,8 @@ const Scene1: React.FC<Scene1Props> = (props) => {
           <Img
             src={props.logo}
             style={{
-              width: '900px',
-              height: '900px',
+              width: '500px',
+              height: '500px',
               objectFit: 'contain',
             }}
           />

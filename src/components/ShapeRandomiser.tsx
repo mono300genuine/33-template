@@ -21,7 +21,7 @@ interface Point {
 
 const getRandomPosition = (max: number) => random(null) * max;
 
-const AnimatedShapes: React.FC<Props> = ({
+const ShapeRandomiser: React.FC<Props> = ({
   width,
   height,
   rectInterval,
@@ -94,4 +94,4 @@ const AnimatedShapes: React.FC<Props> = ({
   );
 };
 
-export default AnimatedShapes;
+export default ShapeRandomiser;

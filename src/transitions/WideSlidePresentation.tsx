@@ -43,11 +43,11 @@ const SlidePresentation: React.FC<SlidePresentationProps> = ({
           };
         case 'from-top':
           return {
-            transform: `translateY(${presentationProgressWithEpsilonCorrection}%) translateX(${presentationProgressWithEpsilonCorrection}%)`,
+            transform: `translateY(${presentationProgressWithEpsilonCorrection}%) `,
           };
         case 'from-bottom':
           return {
-            transform: `translateY(${-presentationProgress * 100}%) translateX(${-presentationProgress * 100}%)`,
+            transform: `translateY(${-presentationProgress * 100}%)`,
           };
         default:
           throw new Error(`Invalid direction: ${direction}`);
@@ -65,11 +65,11 @@ const SlidePresentation: React.FC<SlidePresentationProps> = ({
         };
       case 'from-top':
         return {
-          transform: `translateY(${-100 + presentationProgress * 100}%) translateX(${-100 + presentationProgress * 100}%)`,
+          transform: `translateY(${-100 + presentationProgress * 100}%)`,
         };
       case 'from-bottom':
         return {
-          transform: `translateY(${100 - presentationProgressWithEpsilonCorrection}%) translateX(${100 - presentationProgressWithEpsilonCorrection}%)`,
+          transform: `translateY(${100 - presentationProgressWithEpsilonCorrection}%)`,
         };
       default:
         throw new Error(`Invalid direction: ${direction}`);

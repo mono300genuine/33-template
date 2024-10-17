@@ -29,6 +29,8 @@ const findMaxFontSize = ({
   template: Element;
 }) => {
   const element = createElement(style);
+  if (!text) return initialFontSize;
+
   element.textContent = text.replaceAll('-', '\u2011');
   template.appendChild(element);
 
@@ -53,10 +55,10 @@ const splitTextIntoLines = ({
   style: CSSProperties;
   template: Element;
 }) => {
+  if (!inputText) return '';
   const element = createElement(style);
   element.style.fontSize = `${fontSize}px`;
   template.appendChild(element);
-
   const words = inputText.replaceAll('\n', ' ').split(' ').filter(Boolean);
   let previousWords: string[] = [];
   const wordLines: string[][] = [];

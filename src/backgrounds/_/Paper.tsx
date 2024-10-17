@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 import { colorVar } from '../../lib/helpers';
 import { defineBackground } from '../define';
+import { HEIGHT, WIDTH } from '../../lib/consts';
 
 export const PaperBackground = defineBackground({
   type: 'paper',
