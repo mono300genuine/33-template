@@ -16,6 +16,7 @@ import RectWithSideLines from '../components/RectWithSideLines';
 import SweepComponent from '../components/SweepComponent';
 import { TextCharsRandomOpacity } from '../components/animations/TextCharsRandomOpacity';
 import { useTextSplitter } from '../lib/useTextSplitter';
+import { HEIGHT, WIDTH } from '../lib/consts';
 
 export const scene3Schema = z.object({
   logo: z.string(),
@@ -26,7 +27,7 @@ export const scene3Schema = z.object({
 type Scene3Props = z.infer<typeof scene3Schema> & { background: BackgroundProps };
 
 const Scene3: React.FC<Scene3Props> = (props) => {
-  const { width, height, fps, durationInFrames } = useVideoConfig();
+  const { fps, durationInFrames } = useVideoConfig();
   const titleSplit = useTextSplitter({
     text: props.title,
     fontSize: 100,
@@ -36,10 +37,10 @@ const Scene3: React.FC<Scene3Props> = (props) => {
     maxWidth: 700,
   });
 
-  const cx = width / 6;
-  const cy = height / 3;
-  const rx = width / 4;
-  const ry = height / 2;
+  const cx = WIDTH / 6;
+  const cy = HEIGHT / 3;
+  const rx = WIDTH / 4;
+  const ry = HEIGHT / 2;
 
   const radius = 40;
   const frame = useCurrentFrame();
@@ -53,12 +54,12 @@ const Scene3: React.FC<Scene3Props> = (props) => {
       extrapolateRight: 'clamp',
     }
   );
-  const x = width * 0.55;
-  const y = height;
+  const x = WIDTH * 0.55;
+  const y = HEIGHT;
   const rotation = 60;
 
-  const x1 = width * 0.95;
-  const y1 = height / 3.5;
+  const x1 = WIDTH * 0.95;
+  const y1 = HEIGHT / 3.5;
   const currentRadius = defaultSpring({
     frame,
     from: 100,
@@ -81,10 +82,10 @@ const Scene3: React.FC<Scene3Props> = (props) => {
   });
 
   // Calculate the scaled dimensions and offsets
-  const scaledWidth = width * zoomScale;
-  const scaledHeight = height * zoomScale;
-  const offsetX = (scaledWidth - width) / 2;
-  const offsetY = (scaledHeight - height) / 2;
+  const scaledWidth = WIDTH * zoomScale;
+  const scaledHeight = HEIGHT * zoomScale;
+  const offsetX = (scaledWidth - WIDTH) / 2;
+  const offsetY = (scaledHeight - HEIGHT) / 2;
 
   return (
     <AbsoluteFill>
@@ -93,7 +94,7 @@ const Scene3: React.FC<Scene3Props> = (props) => {
       <SweepComponent>
         <Background {...props.background} />
         <AbsoluteFill>
-          <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+          <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
             <defs>
               <clipPath id="scene-3-clip">
                 <ellipse
@@ -106,11 +107,11 @@ const Scene3: React.FC<Scene3Props> = (props) => {
               </clipPath>
             </defs>
 
-            <circle cx={width * 0.2} cy={height * 0.43} r={460} fill={'#31b3fe'} />
+            <circle cx={WIDTH * 0.2} cy={HEIGHT * 0.43} r={460} fill={'#31b3fe'} />
             <image
               href={props.img}
-              x={cx - width / 2 - offsetX}
-              y={cy - height / 2 - offsetY}
+              x={cx - WIDTH / 2 - offsetX}
+              y={cy - HEIGHT / 2 - offsetY}
               width={scaledWidth}
               height={scaledHeight}
               preserveAspectRatio="xMidYMid slice"
@@ -123,10 +124,10 @@ const Scene3: React.FC<Scene3Props> = (props) => {
               r={radius}
               fill="none"
               stroke={'#093399'}
-              width={width}
-              height={height}
-              x={width}
-              y={height / 2}
+              width={WIDTH}
+              height={HEIGHT}
+              x={WIDTH}
+              y={HEIGHT / 2}
               color="#093399"
               strokeWidth={40}
               radius={40}
@@ -141,8 +142,8 @@ const Scene3: React.FC<Scene3Props> = (props) => {
 
         <AbsoluteFill>
           <RectWithSideLines
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             sideLineLength={80}
             paddingX={100}
             paddingY={55}
@@ -167,10 +168,10 @@ const Scene3: React.FC<Scene3Props> = (props) => {
             position="bottom-left"
             fraction={0.8}
             strokeWidth={5}
-            width={width}
-            height={height}
-            x={width / 2}
-            y={height / 2}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH / 2}
+            y={HEIGHT / 2}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
             strokeColor="#1997DD"
@@ -183,10 +184,10 @@ const Scene3: React.FC<Scene3Props> = (props) => {
             position="top-right"
             fraction={0.8}
             strokeWidth={5}
-            width={width}
-            height={height}
-            x={width * 0.85}
-            y={height * 0.8}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.85}
+            y={HEIGHT * 0.8}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
             strokeColor="#1997DD"
@@ -200,10 +201,10 @@ const Scene3: React.FC<Scene3Props> = (props) => {
             color={colorVar('secondary')}
             beginRadius={0}
             endRadius={40}
-            width={width}
-            height={height}
-            x={width * 0.45}
-            y={height * 0.7}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.45}
+            y={HEIGHT * 0.7}
             clipId="scene-2-clip-2"
           />
         </AbsoluteFill>
@@ -214,10 +215,10 @@ const Scene3: React.FC<Scene3Props> = (props) => {
             color={colorVar('accent')}
             beginRadius={0}
             endRadius={60}
-            width={width}
-            height={height}
-            x={width * 0.9}
-            y={height * 0.55}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.9}
+            y={HEIGHT * 0.55}
             clipId="scene-2-clip-3"
           />
         </AbsoluteFill>
@@ -227,3 +228,4 @@ const Scene3: React.FC<Scene3Props> = (props) => {
 };
 
 export default Scene3;
+

@@ -21,7 +21,7 @@ export const scene8Schema = z.object({
 type Scene8Props = z.infer<typeof scene8Schema> & { background: BackgroundProps };
 
 const Scene8: React.FC<Scene8Props> = (props) => {
-  const { width, height, fps } = useVideoConfig();
+  const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
   const titleText = useTextSplitter({
     text: props.title,
@@ -29,20 +29,20 @@ const Scene8: React.FC<Scene8Props> = (props) => {
     fontWeight: '800',
     letterSpacing: '6px',
     maxLines: 1,
-    maxWidth: width * 0.75,
+    maxWidth: WIDTH * 0.75,
   });
 
   const phoneText = useTextSplitter({
     text: props.phone,
-    fontSize: 30,
-    fontWeight: '400',
+    fontSize: 40,
+    fontWeight: '300',
     letterSpacing: '6px',
     maxLines: 1,
     maxWidth: 300,
   });
 
-  const x1 = width / 2;
-  const y1 = height / 2;
+  const x1 = WIDTH / 2;
+  const y1 = HEIGHT / 2;
   const currentRadius = defaultSpring({
     frame,
     from: 200,
@@ -57,10 +57,10 @@ const Scene8: React.FC<Scene8Props> = (props) => {
         <Background {...props.background} />
         <AbsoluteFill>
           <CircleOutline
-            width={width}
-            height={height}
-            x={width / 2}
-            y={height / 2}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH / 2}
+            y={HEIGHT / 2}
             beginRadius={20}
             endRadius={430}
             color="black"
@@ -87,7 +87,14 @@ const Scene8: React.FC<Scene8Props> = (props) => {
             }}
           >
             <TextCharsRandomOpacity text={titleText.text} color={colorVar('primaryText')} />
-            <TextCharsRandomOpacity text={phoneText.text} color={colorVar('primaryText')} />
+            <div
+              style={{
+                ...phoneText.style,
+                marginTop: 50,
+              }}
+            >
+              <TextCharsRandomOpacity text={phoneText.text} color={colorVar('secondaryText')} />
+            </div>
           </div>
         </AbsoluteFill>
 
@@ -98,10 +105,10 @@ const Scene8: React.FC<Scene8Props> = (props) => {
             color="#0A2F81"
             beginRadius={0}
             endRadius={40}
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             x={240}
-            y={height / 2}
+            y={HEIGHT / 2}
             clipId="scene-1-clip-1"
           />
         </AbsoluteFill>
@@ -112,10 +119,10 @@ const Scene8: React.FC<Scene8Props> = (props) => {
             color={colorVar('secondary')}
             beginRadius={0}
             endRadius={40}
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             x={1680}
-            y={height / 2}
+            y={HEIGHT / 2}
             clipId="scene-1-clip-2"
           />
         </AbsoluteFill>
@@ -126,8 +133,8 @@ const Scene8: React.FC<Scene8Props> = (props) => {
             color="#0A2F81"
             beginRadius={0}
             endRadius={120}
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             x={260}
             y={260}
             clipId="scene-1-clip-3"
@@ -135,10 +142,10 @@ const Scene8: React.FC<Scene8Props> = (props) => {
         </AbsoluteFill>
         <AbsoluteFill>
           <AnimatedOutlinedCircle
-            width={width}
-            height={height}
-            x={width * 0.8}
-            y={height}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.8}
+            y={HEIGHT}
             color="#093399"
             strokeWidth={150}
             radius={130}
@@ -148,9 +155,9 @@ const Scene8: React.FC<Scene8Props> = (props) => {
 
         <AbsoluteFill>
           <AnimatedOutlinedCircle
-            width={width}
-            height={height}
-            x={width / 5}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH / 5}
             y={0}
             color="#093399"
             strokeWidth={40}
@@ -160,8 +167,8 @@ const Scene8: React.FC<Scene8Props> = (props) => {
         </AbsoluteFill>
         <AbsoluteFill>
           <RectWithSideLines
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             sideLineLength={80}
             paddingX={100}
             paddingY={55}

@@ -31,7 +31,7 @@ const Scene5: React.FC<Scene5Props> = (props) => {
 
   const radius = 80;
   const frame = useCurrentFrame();
-  const { durationInFrames, fps, width, height } = useVideoConfig();
+  const { durationInFrames, fps } = useVideoConfig();
   const strokeDasharray = 2 * Math.PI * radius;
   const strokeDashoffset = interpolate(
     frame,
@@ -42,12 +42,12 @@ const Scene5: React.FC<Scene5Props> = (props) => {
       extrapolateRight: 'clamp',
     }
   );
-  const x = width;
-  const y = height / 2;
+  const x = WIDTH;
+  const y = HEIGHT / 2;
   const rotation = -60;
 
-  const x1 = width * 0.8;
-  const y1 = height * 0.2;
+  const x1 = WIDTH * 0.8;
+  const y1 = HEIGHT * 0.2;
   const currentRadius = defaultSpring({
     frame,
     from: 400,
@@ -101,8 +101,8 @@ const Scene5: React.FC<Scene5Props> = (props) => {
               r={radius}
               fill="none"
               stroke={'#093399'}
-              width={width}
-              height={height}
+              width={WIDTH}
+              height={HEIGHT}
               color="#093399"
               strokeWidth={60}
               strokeDasharray={strokeDasharray}
@@ -119,10 +119,10 @@ const Scene5: React.FC<Scene5Props> = (props) => {
             position="top-right"
             fraction={0.8}
             strokeWidth={5}
-            width={width}
-            height={height}
-            x={width * 0.85}
-            y={height * 0.4}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.85}
+            y={HEIGHT * 0.4}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
             strokeColor="#1997DD"
@@ -135,10 +135,10 @@ const Scene5: React.FC<Scene5Props> = (props) => {
             position="top-right"
             fraction={0.8}
             strokeWidth={5}
-            width={width}
-            height={height}
-            x={width * 0.55}
-            y={height * 0.8}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.55}
+            y={HEIGHT * 0.8}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
             strokeColor="#1997DD"
@@ -151,10 +151,10 @@ const Scene5: React.FC<Scene5Props> = (props) => {
             color={colorVar('secondary')}
             beginRadius={0}
             endRadius={140}
-            width={width}
-            height={height}
-            x={width * 0.8}
-            y={height * 0.25}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.8}
+            y={HEIGHT * 0.25}
             clipId="scene-5-clip-3"
           />
         </AbsoluteFill>
@@ -165,10 +165,10 @@ const Scene5: React.FC<Scene5Props> = (props) => {
             color={colorVar('accent')}
             beginRadius={0}
             endRadius={60}
-            width={width}
-            height={height}
-            x={width * 0.6}
-            y={height * 0.55}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.6}
+            y={HEIGHT * 0.55}
             clipId="scene-5-clip-4"
           />
         </AbsoluteFill>

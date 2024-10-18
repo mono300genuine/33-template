@@ -77,7 +77,7 @@ const Main: React.FC<MainProps> = ({
       <AbsoluteFill
         id={id}
         style={{
-          background: 'black',
+          background: 'white',
           ...getCSSVariables({ colors: colors, fonts: fonts, roundness: 1 }),
         }}
       >

@@ -20,6 +20,7 @@ import { colorVar } from '../lib/helpers';
 import OverlappingSquares from '../components/OverlappingSquares';
 import AnimatedOutlinedCircle from '../components/AnimatedOutlineCircle';
 import FilledCircle from '../components/FilledCirlcle';
+import { HEIGHT, WIDTH } from '../lib/consts';
 
 export const scene2Schema = z.object({
   logo: z.string(),
@@ -31,9 +32,9 @@ export const scene2Schema = z.object({
 type Scene2Props = z.infer<typeof scene2Schema> & { background: BackgroundProps };
 
 const Scene2: React.FC<Scene2Props> = (props) => {
-  const { width, height, fps, durationInFrames } = useVideoConfig();
+  const { fps, durationInFrames } = useVideoConfig();
   const frame = useCurrentFrame();
-  const circleRadius = Math.min(width, height) * 0.35;
+  const circleRadius = Math.min(WIDTH, HEIGHT) * 0.35;
   const titleSplit = useTextSplitter({
     text: props.title,
     fontSize: 100,
@@ -87,23 +88,23 @@ const Scene2: React.FC<Scene2Props> = (props) => {
         <Background {...props.background} />
         <AbsoluteFill>
           <FilledCircle
-            x={width / 6}
-            y={height / 8}
+            x={WIDTH / 6}
+            y={HEIGHT / 8}
             beginRadius={400}
             endRadius={600}
-            height={height}
-            width={width}
+            height={HEIGHT}
+            width={WIDTH}
             color="#18FFFF"
           />
         </AbsoluteFill>
         <AbsoluteFill>
           <FilledCircle
             x={circleRadius * 0.9}
-            y={height - circleRadius / 4}
+            y={HEIGHT - circleRadius / 4}
             beginRadius={circleRadius * 0.8}
             endRadius={circleRadius * 1.1}
-            height={height}
-            width={width}
+            height={HEIGHT}
+            width={WIDTH}
             color="#093399"
           />
         </AbsoluteFill>
@@ -150,8 +151,8 @@ const Scene2: React.FC<Scene2Props> = (props) => {
         </AbsoluteFill>
         <AbsoluteFill>
           <RectWithSideLines
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             sideLineLength={80}
             paddingX={100}
             paddingY={55}
@@ -176,10 +177,10 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             position="bottom-left"
             fraction={0.8}
             strokeWidth={5}
-            width={width}
-            height={height}
-            x={width / 2.7}
-            y={height / 2}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH / 2.7}
+            y={HEIGHT / 2}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
             strokeColor="#1997DD"
@@ -192,10 +193,10 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             position="top-right"
             fraction={0.8}
             strokeWidth={5}
-            width={width}
-            height={height}
-            x={width * 0.8}
-            y={height * 0.85}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.8}
+            y={HEIGHT * 0.85}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
             strokeColor="#1997DD"
@@ -208,8 +209,8 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             color={colorVar('secondary')}
             beginRadius={180}
             endRadius={180}
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             x={840}
             y={260}
             clipId="scene-2-clip-1"
@@ -223,10 +224,10 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             color={colorVar('accent')}
             beginRadius={0}
             endRadius={60}
-            width={width}
-            height={height}
-            x={width * 0.7}
-            y={height * 0.2}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.7}
+            y={HEIGHT * 0.2}
             clipId="scene-2-clip-2"
           />
         </AbsoluteFill>
@@ -237,19 +238,19 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             color={colorVar('secondary')}
             beginRadius={0}
             endRadius={40}
-            width={width}
-            height={height}
-            x={width * 0.9}
-            y={height * 0.75}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.9}
+            y={HEIGHT * 0.75}
             clipId="scene-2-clip-3"
           />
         </AbsoluteFill>
         <AbsoluteFill>
           <AnimatedOutlinedCircle
-            width={width}
-            height={height}
-            x={width}
-            y={height / 2}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH}
+            y={HEIGHT / 2}
             color="#093399"
             strokeWidth={40}
             radius={40}
@@ -257,9 +258,9 @@ const Scene2: React.FC<Scene2Props> = (props) => {
           />
         </AbsoluteFill>
       </SweepComponent>
-      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+      <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
         <clipPath id="clip">
-          <circle cx={circleRadius * 1.3} cy={height - circleRadius / 4} r={circleRadius} />
+          <circle cx={circleRadius * 1.3} cy={HEIGHT - circleRadius / 4} r={circleRadius} />
         </clipPath>
         <clipPath id="clip-2">
           <rect x="20%" width="100%" height="100%" fill="red" />

@@ -1,7 +1,7 @@
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig, Audio } from 'remotion';
 import { z } from 'zod';
 import { Background } from '../components/Background';
-import { WIDTH } from '../lib/consts';
+import { HEIGHT, WIDTH } from '../lib/consts';
 import { BackgroundProps } from '../backgrounds';
 import { colorVar, defaultSpring } from '../lib/helpers';
 import CircleGrid from '../components/CircleGrid';
@@ -23,7 +23,7 @@ type Scene6Props = z.infer<typeof scene6Schema> & {
 };
 
 const Scene6: React.FC<Scene6Props> = (props) => {
-  const { width, height, fps, durationInFrames } = useVideoConfig();
+  const { fps, durationInFrames } = useVideoConfig();
   const frame = useCurrentFrame();
 
   const titleText = useTextSplitter({
@@ -35,8 +35,8 @@ const Scene6: React.FC<Scene6Props> = (props) => {
     maxWidth: WIDTH * 0.6,
   });
 
-  const cx = width / 4;
-  const cy = height;
+  const cx = WIDTH / 4;
+  const cy = HEIGHT;
 
   const radius = 40;
   const strokeDasharray = 2 * Math.PI * radius;
@@ -49,12 +49,12 @@ const Scene6: React.FC<Scene6Props> = (props) => {
       extrapolateRight: 'clamp',
     }
   );
-  const x = width;
-  const y = height / 2;
+  const x = WIDTH;
+  const y = HEIGHT / 2;
   const rotation = -30;
 
-  const x1 = width * 1.05;
-  const y1 = height * 0.1;
+  const x1 = WIDTH * 1.05;
+  const y1 = HEIGHT * 0.1;
   const currentRadius = defaultSpring({
     frame,
     from: 200,
@@ -74,7 +74,7 @@ const Scene6: React.FC<Scene6Props> = (props) => {
       <SweepComponent>
         <Background {...props.background} />
         <AbsoluteFill>
-          <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+          <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
             <defs>
               <clipPath id="scene-6-clip">
                 <rect y="0" x="0" width="100%" height="60%" id="scene-6-clip-shape" />
@@ -84,10 +84,10 @@ const Scene6: React.FC<Scene6Props> = (props) => {
 
             <image
               href={props.img}
-              x={(width * (1 - zoomScale)) / 2}
-              y={(height * 0.6 * (1 - zoomScale)) / 2}
-              width={width * zoomScale}
-              height={height * zoomScale}
+              x={(WIDTH * (1 - zoomScale)) / 2}
+              y={(HEIGHT * 0.6 * (1 - zoomScale)) / 2}
+              width={WIDTH * zoomScale}
+              height={HEIGHT * zoomScale}
               preserveAspectRatio="xMidYMid slice"
               clipPath="url(#scene-6-clip)"
             />
@@ -99,8 +99,8 @@ const Scene6: React.FC<Scene6Props> = (props) => {
               r={radius}
               fill="none"
               stroke={'#093399'}
-              width={width}
-              height={height}
+              width={WIDTH}
+              height={HEIGHT}
               color="#093399"
               strokeWidth={40}
               strokeDasharray={strokeDasharray}
@@ -113,8 +113,8 @@ const Scene6: React.FC<Scene6Props> = (props) => {
 
         <AbsoluteFill>
           <RectWithSideLines
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             sideLineLength={80}
             paddingX={100}
             paddingY={55}
@@ -139,10 +139,10 @@ const Scene6: React.FC<Scene6Props> = (props) => {
             position="bottom-left"
             fraction={0.8}
             strokeWidth={5}
-            width={width}
-            height={height}
-            x={width * 0.91}
-            y={height * 0.62}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.91}
+            y={HEIGHT * 0.62}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
             strokeColor="#1997DD"
@@ -155,10 +155,10 @@ const Scene6: React.FC<Scene6Props> = (props) => {
             position="top-right"
             fraction={0.8}
             strokeWidth={5}
-            width={width}
-            height={height}
-            x={width * 0.35}
-            y={height * 0.75}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.35}
+            y={HEIGHT * 0.75}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
             strokeColor="#1997DD"
@@ -172,10 +172,10 @@ const Scene6: React.FC<Scene6Props> = (props) => {
             color={colorVar('secondary')}
             beginRadius={0}
             endRadius={50}
-            width={width}
-            height={height}
-            x={width * 0.4}
-            y={height * 0.6}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.4}
+            y={HEIGHT * 0.6}
             clipId="scene-6-clip-2"
           />
         </AbsoluteFill>
@@ -186,10 +186,10 @@ const Scene6: React.FC<Scene6Props> = (props) => {
             color={colorVar('accent')}
             beginRadius={0}
             endRadius={70}
-            width={width}
-            height={height}
-            x={width * 0.75}
-            y={height * 0.2}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.75}
+            y={HEIGHT * 0.2}
             clipId="scene-6-clip-3"
           />
         </AbsoluteFill>
@@ -200,10 +200,10 @@ const Scene6: React.FC<Scene6Props> = (props) => {
             color={colorVar('secondary')}
             beginRadius={0}
             endRadius={120}
-            width={width}
-            height={height}
-            x={width * 0.3}
-            y={height * 0.3}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH * 0.3}
+            y={HEIGHT * 0.3}
             clipId="scene-6-clip-1"
           />
         </AbsoluteFill>

@@ -1,4 +1,4 @@
-import { AbsoluteFill, Img, useCurrentFrame, useVideoConfig, Audio, Sequence } from 'remotion';
+import { AbsoluteFill, Img, Audio, Sequence } from 'remotion';
 import { z } from 'zod';
 import { BackgroundProps } from '../backgrounds';
 import RectWithSideLines from '../components/RectWithSideLines';
@@ -6,8 +6,9 @@ import CircleGrid from '../components/CircleGrid';
 import CircleOutline from '../components/CircleOutline';
 import AnimatedOutlinedCircle from '../components/AnimatedOutlineCircle';
 import SweepComponent from '../components/SweepComponent';
-import { colorVar, defaultSpring } from '../lib/helpers';
+import { colorVar } from '../lib/helpers';
 import { Background } from '../components/Background';
+import { HEIGHT, WIDTH } from '../lib/consts';
 
 export const scene1Schema = z.object({
   logo: z.string(),
@@ -16,8 +17,6 @@ export const scene1Schema = z.object({
 type Scene1Props = z.infer<typeof scene1Schema> & { background: BackgroundProps };
 
 const Scene1: React.FC<Scene1Props> = (props) => {
-  const { width, height } = useVideoConfig();
-
   return (
     <AbsoluteFill style={{ overflow: 'hidden' }}>
       <Sequence from={10}>
@@ -29,10 +28,10 @@ const Scene1: React.FC<Scene1Props> = (props) => {
 
         <AbsoluteFill>
           <CircleOutline
-            width={width}
-            height={height}
-            x={width / 2}
-            y={height / 2}
+            width={WIDTH}
+            height={HEIGHT}
+            x={WIDTH / 2}
+            y={HEIGHT / 2}
             beginRadius={20}
             endRadius={430}
             color="black"
@@ -63,10 +62,10 @@ const Scene1: React.FC<Scene1Props> = (props) => {
             color="#0A2F81"
             beginRadius={0}
             endRadius={40}
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             x={240}
-            y={height / 2}
+            y={HEIGHT / 2}
             clipId="scene-1-clip-1"
           />
         </AbsoluteFill>
@@ -77,10 +76,10 @@ const Scene1: React.FC<Scene1Props> = (props) => {
             color={colorVar('secondary')}
             beginRadius={0}
             endRadius={40}
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             x={1680}
-            y={height / 2}
+            y={HEIGHT / 2}
             clipId="scene-1-clip-2"
           />
         </AbsoluteFill>
@@ -91,8 +90,8 @@ const Scene1: React.FC<Scene1Props> = (props) => {
             color="#0A2F81"
             beginRadius={0}
             endRadius={120}
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             x={260}
             y={260}
             clipId="scene-1-clip-3"
@@ -100,10 +99,10 @@ const Scene1: React.FC<Scene1Props> = (props) => {
         </AbsoluteFill>
         <AbsoluteFill>
           <AnimatedOutlinedCircle
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             x={280}
-            y={height}
+            y={HEIGHT}
             color="#093399"
             strokeWidth={70}
             radius={130}
@@ -113,8 +112,8 @@ const Scene1: React.FC<Scene1Props> = (props) => {
 
         <AbsoluteFill>
           <AnimatedOutlinedCircle
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             x={1680}
             y={0}
             color="#093399"
@@ -125,8 +124,8 @@ const Scene1: React.FC<Scene1Props> = (props) => {
         </AbsoluteFill>
         <AbsoluteFill>
           <RectWithSideLines
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             sideLineLength={80}
             paddingX={100}
             paddingY={55}

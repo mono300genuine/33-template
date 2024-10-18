@@ -1,4 +1,3 @@
-import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
 import { colorVar, defaultSpring } from '../lib/helpers';
 

@@ -18,6 +18,7 @@ import RectWithSideLines from '../components/RectWithSideLines';
 import SweepComponent from '../components/SweepComponent';
 import { TextCharsRandomOpacity } from '../components/animations/TextCharsRandomOpacity';
 import { useTextSplitter } from '../lib/useTextSplitter';
+import { WIDTH, HEIGHT } from '../lib/consts';
 
 export const scene4Schema = z.object({
   img: z.string(),
@@ -31,7 +32,7 @@ type Scene4Props = z.infer<typeof scene4Schema> & {
 };
 
 const Scene4: React.FC<Scene4Props> = (props) => {
-  const { width, height, durationInFrames, fps } = useVideoConfig();
+  const { durationInFrames, fps } = useVideoConfig();
   const frame = useCurrentFrame();
 
   const titleText = useTextSplitter({
@@ -52,8 +53,8 @@ const Scene4: React.FC<Scene4Props> = (props) => {
     maxWidth: 700,
   });
 
-  const cx = width / 2;
-  const cy = height;
+  const cx = WIDTH / 2;
+  const cy = HEIGHT;
 
   const radius = 80;
   const strokeDasharray = 2 * Math.PI * radius;
@@ -66,12 +67,12 @@ const Scene4: React.FC<Scene4Props> = (props) => {
       extrapolateRight: 'clamp',
     }
   );
-  const x = width / 2;
+  const x = WIDTH / 2;
   const y = 0;
   const rotation = -60;
 
-  const x1 = width * 0.95;
-  const y1 = height / 3.5;
+  const x1 = WIDTH * 0.95;
+  const y1 = HEIGHT / 3.5;
   const currentRadius = defaultSpring({
     frame,
     from: 100,
@@ -82,7 +83,7 @@ const Scene4: React.FC<Scene4Props> = (props) => {
   const slideInDuration = fps * 1.5;
   const imageTranslateX = spring({
     frame,
-    from: -width * 0.8,
+    from: -WIDTH * 0.8,
     to: 0,
     durationInFrames: slideInDuration,
     fps,
@@ -108,7 +109,7 @@ const Scene4: React.FC<Scene4Props> = (props) => {
 
       <Background {...props.background} />
       <AbsoluteFill>
-        <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+        <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
           <defs>
             <clipPath id="circleClip">
               <circle cx={cx} cy={cy} r={600} />
@@ -119,10 +120,10 @@ const Scene4: React.FC<Scene4Props> = (props) => {
           <g clipPath="url(#circleClip)">
             <image
               href={props.img}
-              x={cx - width / imageOffsetX + imageTranslateX}
-              y={cy - height / imageOffsetY}
-              width={width * imageScale}
-              height={height * imageScale}
+              x={cx - WIDTH / imageOffsetX + imageTranslateX}
+              y={cy - HEIGHT / imageOffsetY}
+              width={WIDTH * imageScale}
+              height={HEIGHT * imageScale}
               preserveAspectRatio="xMidYMid slice"
             />
           </g>
@@ -133,8 +134,8 @@ const Scene4: React.FC<Scene4Props> = (props) => {
             r={radius}
             fill="none"
             stroke={'#093399'}
-            width={width}
-            height={height}
+            width={WIDTH}
+            height={HEIGHT}
             color="#093399"
             strokeWidth={60}
             strokeDasharray={strokeDasharray}
@@ -148,8 +149,8 @@ const Scene4: React.FC<Scene4Props> = (props) => {
 
       <AbsoluteFill>
         <RectWithSideLines
-          width={width}
-          height={height}
+          width={WIDTH}
+          height={HEIGHT}
           sideLineLength={80}
           paddingX={100}
           paddingY={55}
@@ -175,10 +176,10 @@ const Scene4: React.FC<Scene4Props> = (props) => {
           position="bottom-left"
           fraction={0.8}
           strokeWidth={5}
-          width={width}
-          height={height}
-          x={width * 0.91}
-          y={height * 0.063}
+          width={WIDTH}
+          height={HEIGHT}
+          x={WIDTH * 0.91}
+          y={HEIGHT * 0.063}
           renderOrder="foreground"
           fillColor={colorVar('accent')}
           strokeColor="#1997DD"
@@ -191,10 +192,10 @@ const Scene4: React.FC<Scene4Props> = (props) => {
           position="top-right"
           fraction={0.8}
           strokeWidth={5}
-          width={width}
-          height={height}
-          x={width * 0.06}
-          y={height * 0.7}
+          width={WIDTH}
+          height={HEIGHT}
+          x={WIDTH * 0.06}
+          y={HEIGHT * 0.7}
           renderOrder="foreground"
           fillColor={colorVar('accent')}
           strokeColor="#1997DD"
@@ -208,10 +209,10 @@ const Scene4: React.FC<Scene4Props> = (props) => {
           color={colorVar('secondary')}
           beginRadius={0}
           endRadius={70}
-          width={width}
-          height={height}
-          x={width * 0.51}
-          y={height * 0.35}
+          width={WIDTH}
+          height={HEIGHT}
+          x={WIDTH * 0.51}
+          y={HEIGHT * 0.35}
           clipId="scene-2-clip-2"
         />
       </AbsoluteFill>
@@ -222,11 +223,11 @@ const Scene4: React.FC<Scene4Props> = (props) => {
           color={colorVar('accent')}
           beginRadius={0}
           endRadius={200}
-          width={width}
+          width={WIDTH}
           direction="vertical"
-          height={height}
-          x={width * 0.8}
-          y={height * 0.65}
+          height={HEIGHT}
+          x={WIDTH * 0.8}
+          y={HEIGHT * 0.65}
           clipId="scene-2-clip-3"
         />
       </AbsoluteFill>

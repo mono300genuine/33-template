@@ -25,7 +25,7 @@ export const RemotionRoot: React.FC = () => {
             primary: '#f00',
             primaryText: '#002892',
             secondary: '#333',
-            secondaryText: '#f00',
+            secondaryText: '#333',
             accent: '#3664D1',
             accentText: '#f00',
           },
@@ -85,12 +85,12 @@ export const RemotionRoot: React.FC = () => {
             subtitle: 'Your Potential',
             voiceOver: staticFile('VO_7.mp3'),
           },
-          scene8Duration: 150,
+          scene8Duration: 155,
           scene8Props: {
             logo: staticFile('Logo.png'),
             title: 'Your Fitness,\nOur Passion',
             phone: '505-882-5117',
-            voiceOver: staticFile('VO_8.mp3'),
+            voiceOver: staticFile('VO_9.mp3'),
           },
         }}
       />
@@ -130,7 +130,6 @@ export const RemotionRoot: React.FC = () => {
           scene1Duration: 150,
           scene1Props: {
             logo: staticFile('Logo.png'),
-            image: staticFile('Logo.png'),
             voiceOver: staticFile('VO_7.mp3'),
           },
           scene2Duration: 180,
