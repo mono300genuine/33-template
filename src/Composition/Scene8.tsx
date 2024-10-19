@@ -63,13 +63,13 @@ const Scene8: React.FC<Scene8Props> = (props) => {
             y={HEIGHT / 2}
             beginRadius={20}
             endRadius={430}
-            color={colorVar("black")}
+            color="black"
             strokeWidth={1}
           />
         </AbsoluteFill>
         <AbsoluteFill>
           <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
-            <circle cx={x1} cy={y1} r={currentRadius} fill={colorVar("#02f3ff")} />
+            <circle cx={x1} cy={y1} r={currentRadius} fill="#02f3ff" />
           </svg>
         </AbsoluteFill>
         <AbsoluteFill
@@ -82,15 +82,24 @@ const Scene8: React.FC<Scene8Props> = (props) => {
           <Img src={props.logo} />
           <div
             style={{
-              ...titleText.style,
+              position: 'absolute',
+              marginTop: '300px',
               textAlign: 'center',
+              width: '100%',
             }}
           >
-            <TextCharsRandomOpacity text={titleText.text} color={colorVar('primaryText')} />
+            <div
+              style={{
+                ...titleText.style,
+                textAlign: 'center',
+              }}
+            >
+              <TextCharsRandomOpacity text={titleText.text} color={colorVar('primaryText')} />
+            </div>
             <div
               style={{
                 ...phoneText.style,
-                marginTop: 50,
+                marginTop: '20px',
               }}
             >
               <TextCharsRandomOpacity text={phoneText.text} color={colorVar('secondaryText')} />
@@ -146,7 +155,7 @@ const Scene8: React.FC<Scene8Props> = (props) => {
             height={HEIGHT}
             x={WIDTH * 0.8}
             y={HEIGHT}
-            color="#093399"
+            color={colorVar("#093399")}
             strokeWidth={150}
             radius={130}
             rotation={80}
