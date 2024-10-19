@@ -123,12 +123,12 @@ const Scene3: React.FC<Scene3Props> = (props) => {
               cy={y}
               r={radius}
               fill="none"
-              stroke={'#093399'}
+              stroke={colorVar('#093399')}
               width={WIDTH}
               height={HEIGHT}
               x={WIDTH}
               y={HEIGHT / 2}
-              color="#093399"
+              color={colorVar("#093399")}
               strokeWidth={40}
               radius={40}
               strokeDasharray={strokeDasharray}
@@ -174,7 +174,7 @@ const Scene3: React.FC<Scene3Props> = (props) => {
             y={HEIGHT / 2}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
-            strokeColor="#1997DD"
+            strokeColor={colorVar("#1997DD")}
           />
         </AbsoluteFill>
         <AbsoluteFill>
@@ -190,7 +190,7 @@ const Scene3: React.FC<Scene3Props> = (props) => {
             y={HEIGHT * 0.8}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
-            strokeColor="#1997DD"
+            strokeColor={colorVar("#1997DD")}
           />
         </AbsoluteFill>
 

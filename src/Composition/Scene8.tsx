@@ -63,13 +63,13 @@ const Scene8: React.FC<Scene8Props> = (props) => {
             y={HEIGHT / 2}
             beginRadius={20}
             endRadius={430}
-            color="black"
+            color={colorVar("black")}
             strokeWidth={1}
           />
         </AbsoluteFill>
         <AbsoluteFill>
           <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
-            <circle cx={x1} cy={y1} r={currentRadius} fill="#02f3ff" />
+            <circle cx={x1} cy={y1} r={currentRadius} fill={colorVar("#02f3ff")} />
           </svg>
         </AbsoluteFill>
         <AbsoluteFill
@@ -102,7 +102,7 @@ const Scene8: React.FC<Scene8Props> = (props) => {
           <CircleGrid
             gap={20}
             strokeWidth={2}
-            color="#0A2F81"
+            color={colorVar("#0A2F81")}
             beginRadius={0}
             endRadius={40}
             width={WIDTH}
@@ -130,7 +130,7 @@ const Scene8: React.FC<Scene8Props> = (props) => {
           <CircleGrid
             gap={20}
             strokeWidth={2}
-            color="#0A2F81"
+            color={colorVar("#0A2F81")}
             beginRadius={0}
             endRadius={120}
             width={WIDTH}
@@ -159,7 +159,7 @@ const Scene8: React.FC<Scene8Props> = (props) => {
             height={HEIGHT}
             x={WIDTH / 5}
             y={0}
-            color="#093399"
+            color={colorVar("#093399")}
             strokeWidth={40}
             radius={30}
             rotation={-120}

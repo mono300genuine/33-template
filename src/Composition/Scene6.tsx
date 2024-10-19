@@ -80,7 +80,7 @@ const Scene6: React.FC<Scene6Props> = (props) => {
                 <rect y="0" x="0" width="100%" height="60%" id="scene-6-clip-shape" />
               </clipPath>
             </defs>
-            <circle cx={cx * 0.9} cy={cy} r={540} fill={'#31b3fe'} />
+            <circle cx={cx * 0.9} cy={cy} r={540} fill={colorVar('#31b3fe')} />
 
             <image
               href={props.img}
@@ -98,10 +98,10 @@ const Scene6: React.FC<Scene6Props> = (props) => {
               cy={y}
               r={radius}
               fill="none"
-              stroke={'#093399'}
+              stroke={colorVar('#093399')}
               width={WIDTH}
               height={HEIGHT}
-              color="#093399"
+              color={colorVar("#093399")}
               strokeWidth={40}
               strokeDasharray={strokeDasharray}
               strokeDashoffset={strokeDashoffset}
@@ -145,7 +145,7 @@ const Scene6: React.FC<Scene6Props> = (props) => {
             y={HEIGHT * 0.62}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
-            strokeColor="#1997DD"
+            strokeColor={colorVar("#1997DD")}
           />
         </AbsoluteFill>
         <AbsoluteFill>

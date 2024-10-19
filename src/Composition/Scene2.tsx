@@ -94,7 +94,7 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             endRadius={600}
             height={HEIGHT}
             width={WIDTH}
-            color="#18FFFF"
+            color={colorVar("#18FFFF")}
           />
         </AbsoluteFill>
         <AbsoluteFill>
@@ -105,7 +105,7 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             endRadius={circleRadius * 1.1}
             height={HEIGHT}
             width={WIDTH}
-            color="#093399"
+            color={colorVar("#093399")}
           />
         </AbsoluteFill>
 
@@ -183,7 +183,7 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             y={HEIGHT / 2}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
-            strokeColor="#1997DD"
+            strokeColor={colorVar("#1997DD")}
           />
         </AbsoluteFill>
         <AbsoluteFill>
@@ -251,7 +251,7 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             height={HEIGHT}
             x={WIDTH}
             y={HEIGHT / 2}
-            color="#093399"
+            color={colorVar("#093399")}
             strokeWidth={40}
             radius={40}
             rotation={60}

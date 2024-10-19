@@ -34,7 +34,7 @@ const Scene1: React.FC<Scene1Props> = (props) => {
             y={HEIGHT / 2}
             beginRadius={20}
             endRadius={430}
-            color="black"
+            color={colorVar('black')}
             strokeWidth={1}
           />
         </AbsoluteFill>
@@ -59,7 +59,7 @@ const Scene1: React.FC<Scene1Props> = (props) => {
           <CircleGrid
             gap={20}
             strokeWidth={2}
-            color="#0A2F81"
+            color={colorVar("#0A2F81")}
             beginRadius={0}
             endRadius={40}
             width={WIDTH}
@@ -87,7 +87,7 @@ const Scene1: React.FC<Scene1Props> = (props) => {
           <CircleGrid
             gap={20}
             strokeWidth={2}
-            color="#0A2F81"
+            color={colorVar("#0A2F81")}
             beginRadius={0}
             endRadius={120}
             width={WIDTH}
@@ -103,7 +103,7 @@ const Scene1: React.FC<Scene1Props> = (props) => {
             height={HEIGHT}
             x={280}
             y={HEIGHT}
-            color="#093399"
+            color={colorVar("#093399")}
             strokeWidth={70}
             radius={130}
             rotation={30}
@@ -116,7 +116,7 @@ const Scene1: React.FC<Scene1Props> = (props) => {
             height={HEIGHT}
             x={1680}
             y={0}
-            color="#093399"
+            color={colorVar("#093399")}
             strokeWidth={40}
             radius={40}
             rotation={-120}

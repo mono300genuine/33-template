@@ -78,7 +78,7 @@ const Scene7: React.FC<Scene7Props> = (props) => {
                 <circle cx={cx} cy={cy} r={600} />
               </clipPath>
             </defs>
-            <circle cx={cx * 0.9} cy={cy} r={580} fill={'#31b3fe'} />
+            <circle cx={cx * 0.9} cy={cy} r={580} fill={colorVar('#31b3fe')} />
 
             <image
               href={props.img}
@@ -95,10 +95,10 @@ const Scene7: React.FC<Scene7Props> = (props) => {
               cy={y}
               r={radius}
               fill="none"
-              stroke={'#093399'}
+              stroke={colorVar('#093399')}
               width={WIDTH}
               height={HEIGHT}
-              color="#093399"
+              color={colorVar("#093399")}
               strokeWidth={60}
               strokeDasharray={strokeDasharray}
               strokeDashoffset={strokeDashoffset}
@@ -143,7 +143,7 @@ const Scene7: React.FC<Scene7Props> = (props) => {
             y={HEIGHT * 0.063}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
-            strokeColor="#1997DD"
+            strokeColor={colorVar("#1997DD")}
           />
         </AbsoluteFill>
         <AbsoluteFill>
@@ -159,7 +159,7 @@ const Scene7: React.FC<Scene7Props> = (props) => {
             y={HEIGHT * 0.7}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
-            strokeColor="#1997DD"
+            strokeColor={colorVar("#1997DD")}
           />
         </AbsoluteFill>
 

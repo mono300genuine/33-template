@@ -78,7 +78,7 @@ const Scene5: React.FC<Scene5Props> = (props) => {
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
               </filter>
             </defs>
-            <circle cx={x1} cy={y1} r={currentRadius} fill="#02f3ff" />
+            <circle cx={x1} cy={y1} r={currentRadius} fill={colorVar("#02f3ff")} />
 
             <g transform={`translate(${slideRight}, 30) scale(${zoom * 0.95})`}>
               <rect x="21%" y="-3%" width="58%" height="100%" opacity={0.3} filter="url(#f1)" />
@@ -100,10 +100,10 @@ const Scene5: React.FC<Scene5Props> = (props) => {
               cy={y}
               r={radius}
               fill="none"
-              stroke={'#093399'}
+              stroke={colorVar('#093399')}
               width={WIDTH}
               height={HEIGHT}
-              color="#093399"
+              color={colorVar("#093399")}
               strokeWidth={60}
               strokeDasharray={strokeDasharray}
               strokeDashoffset={strokeDashoffset}
@@ -125,7 +125,7 @@ const Scene5: React.FC<Scene5Props> = (props) => {
             y={HEIGHT * 0.4}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
-            strokeColor="#1997DD"
+            strokeColor={colorVar("#1997DD")}
           />
         </AbsoluteFill>
         <AbsoluteFill>
@@ -141,7 +141,7 @@ const Scene5: React.FC<Scene5Props> = (props) => {
             y={HEIGHT * 0.8}
             renderOrder="foreground"
             fillColor={colorVar('accent')}
-            strokeColor="#1997DD"
+            strokeColor={colorVar("#1997DD")}
           />
         </AbsoluteFill>
         <AbsoluteFill>

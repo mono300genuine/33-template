@@ -7,7 +7,7 @@ import Main from './Composition'
 export const Compare: React.FC = (props: any) => {
   return (
     // insert Name of your video from public/examples/ folder 
-    <CompareWithVideo example={staticFile(`/examples/${"YourTemplateHere"}.mp4`)}>
+    <CompareWithVideo example={staticFile(`/examples/33.mp4`)}>
       <Main {...props} />
     </CompareWithVideo>
   )
