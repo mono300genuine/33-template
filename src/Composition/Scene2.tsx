@@ -225,8 +225,8 @@ const Scene2: React.FC<Scene2Props> = (props) => {
             endRadius={60}
             width={WIDTH}
             height={HEIGHT}
-            x={WIDTH * 0.7}
-            y={HEIGHT * 0.2}
+            x={WIDTH * 0.65}
+            y={HEIGHT * 0.1}
             clipId="scene-2-clip-2"
           />
         </AbsoluteFill>
