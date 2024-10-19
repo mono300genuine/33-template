@@ -1,9 +1,9 @@
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig, Audio } from 'remotion';
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, Audio } from 'remotion';
 import { z } from 'zod';
 import { Background } from '../components/Background';
 import { BackgroundProps } from '../backgrounds';
 import { HEIGHT, WIDTH } from '../lib/consts';
-import { colorVar, defaultSpring } from '../lib/helpers';
+import { colorVar, defaultSpring, interpolateClamp } from '../lib/helpers';
 import RectWithSideLines from '../components/RectWithSideLines';
 import { useTextSplitter } from '../lib/useTextSplitter';
 import { TextCharsRandomOpacity } from '../components/animations/TextCharsRandomOpacity';
@@ -33,14 +33,10 @@ const Scene5: React.FC<Scene5Props> = (props) => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps } = useVideoConfig();
   const strokeDasharray = 2 * Math.PI * radius;
-  const strokeDashoffset = interpolate(
+  const strokeDashoffset = interpolateClamp(
     frame,
     [0, Math.floor(durationInFrames * 0.9)],
-    [strokeDasharray, 0],
-    {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    }
+    [strokeDasharray, 0]
   );
   const x = WIDTH;
   const y = HEIGHT / 2;
@@ -55,12 +51,8 @@ const Scene5: React.FC<Scene5Props> = (props) => {
     durationInFrames: fps * 2,
   });
 
-  const zoom = interpolate(frame, [0, durationInFrames], [1, 1.1], {
-    extrapolateRight: 'clamp',
-  });
-  const slideRight = interpolate(frame, [0, durationInFrames], [-300, -220], {
-    extrapolateRight: 'clamp',
-  });
+  const zoom = interpolateClamp(frame, [0, durationInFrames], [1, 1.1]);
+  const slideRight = interpolateClamp(frame, [0, durationInFrames], [-300, -220]);
 
   return (
     <AbsoluteFill>

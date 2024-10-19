@@ -1,11 +1,16 @@
-import { interpolate, random, spring } from 'remotion'
+import { EasingFunction, interpolate, random, spring } from 'remotion'
 import { Color, Font } from '../types'
 
 
-
+export const interpolateClamp = (
+  frame: number,
+  inputRange: readonly number[],
+  outputRange: readonly number[],
+  easing?: EasingFunction,
+) => interpolate(frame, inputRange, outputRange, { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing });
 
 export const interpolateSpring = (spring: number, outputRange: readonly number[]) =>
-  interpolate(spring, [0, 1], outputRange, { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })
+  interpolate(spring, [0, 1], outputRange, { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
 // Just a spring function with a better config and no need to pass the FPS.
 const config = { damping: 13, mass: 0.6, stiffness: 65 }
@@ -16,7 +21,7 @@ export const defaultSpring = (props: {
   durationInFrames?: number
   from?: number
   to?: number
-}) => spring({ fps: 30, config, ...props })
+}) => spring({ fps: 30, config, ...props });
 
 export const typedObjectKeys = <T extends object>(object: T) => {
   return Object.keys(object) as (keyof T)[]

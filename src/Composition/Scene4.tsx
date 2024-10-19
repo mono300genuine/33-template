@@ -1,6 +1,5 @@
 import {
   AbsoluteFill,
-  interpolate,
   useCurrentFrame,
   useVideoConfig,
   Audio,
@@ -11,7 +10,7 @@ import {
 import { z } from 'zod';
 import { Background } from '../components/Background';
 import { BackgroundProps } from '../backgrounds';
-import { colorVar, defaultSpring } from '../lib/helpers';
+import { colorVar, defaultSpring, interpolateClamp } from '../lib/helpers';
 import CircleGrid from '../components/CircleGrid';
 import OverlappingSquares from '../components/OverlappingSquares';
 import RectWithSideLines from '../components/RectWithSideLines';
@@ -58,14 +57,10 @@ const Scene4: React.FC<Scene4Props> = (props) => {
 
   const radius = 80;
   const strokeDasharray = 2 * Math.PI * radius;
-  const strokeDashoffset = interpolate(
+  const strokeDashoffset = interpolateClamp(
     frame,
     [0, Math.floor(durationInFrames * 0.9)],
-    [strokeDasharray, 0],
-    {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    }
+    [strokeDasharray, 0]
   );
   const x = WIDTH / 2;
   const y = 0;
@@ -92,11 +87,9 @@ const Scene4: React.FC<Scene4Props> = (props) => {
     },
   });
 
-  const imageScale = interpolate(frame, [0, durationInFrames], [1.1, 1], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-    easing: Easing.out(Easing.cubic),
-  });
+  const imageScale = interpolateClamp(frame, [0, durationInFrames], [1.1, 1], 
+    Easing.out(Easing.cubic)
+  );
 
   // Position the clip on the image.
   // This might be a problem because it's specific to the image.

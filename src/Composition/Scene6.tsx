@@ -1,9 +1,9 @@
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig, Audio } from 'remotion';
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, Audio } from 'remotion';
 import { z } from 'zod';
 import { Background } from '../components/Background';
 import { HEIGHT, WIDTH } from '../lib/consts';
 import { BackgroundProps } from '../backgrounds';
-import { colorVar, defaultSpring } from '../lib/helpers';
+import { colorVar, defaultSpring, interpolateClamp } from '../lib/helpers';
 import CircleGrid from '../components/CircleGrid';
 import OverlappingSquares from '../components/OverlappingSquares';
 import RectWithSideLines from '../components/RectWithSideLines';
@@ -40,14 +40,10 @@ const Scene6: React.FC<Scene6Props> = (props) => {
 
   const radius = 40;
   const strokeDasharray = 2 * Math.PI * radius;
-  const strokeDashoffset = interpolate(
+  const strokeDashoffset = interpolateClamp(
     frame,
     [0, Math.floor(durationInFrames * 0.9)],
-    [strokeDasharray, 0],
-    {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    }
+    [strokeDasharray, 0]
   );
   const x = WIDTH;
   const y = HEIGHT / 2;
@@ -62,10 +58,7 @@ const Scene6: React.FC<Scene6Props> = (props) => {
     durationInFrames: fps * 2,
   });
 
-  const zoomScale = interpolate(frame, [0, durationInFrames], [1, 1.1], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+  const zoomScale = interpolateClamp(frame, [0, durationInFrames], [1, 1.1]);
 
   return (
     <AbsoluteFill>

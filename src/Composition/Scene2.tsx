@@ -5,7 +5,6 @@ import {
   Audio,
   spring,
   useCurrentFrame,
-  interpolate,
 } from 'remotion';
 
 import { z } from 'zod';
@@ -16,7 +15,7 @@ import SweepComponent from '../components/SweepComponent';
 import { Background } from '../components/Background';
 import { useTextSplitter } from '../lib/useTextSplitter';
 import { TextCharsRandomOpacity } from '../components/animations/TextCharsRandomOpacity';
-import { colorVar } from '../lib/helpers';
+import { colorVar, interpolateClamp } from '../lib/helpers';
 import OverlappingSquares from '../components/OverlappingSquares';
 import AnimatedOutlinedCircle from '../components/AnimatedOutlineCircle';
 import FilledCircle from '../components/FilledCirlcle';
@@ -78,7 +77,7 @@ const Scene2: React.FC<Scene2Props> = (props) => {
   });
 
   // Calculate the horizontal translation
-  const translateX = interpolate(slide, [0, 1], [0, -100]);
+  const translateX = interpolateClamp(slide, [0, 1], [0, -100]);
 
   return (
     <AbsoluteFill style={{ overflow: 'hidden' }}>
