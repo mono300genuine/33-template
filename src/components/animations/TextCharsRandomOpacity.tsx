@@ -33,9 +33,9 @@ export const TextCharsRandomOpacity = ({ text, color }: { text: string; color: s
                     delay: 6 + totalCharCount * 1.1 + randomDelay, // Apply random delay
                     durationInFrames: 10,
                     config: {
-                      damping: 200,
-                      mass: 5,
-                      stiffness: 3,
+                      damping: 500,
+                      mass: 15,
+                      stiffness: 5,
                     },
                   });
                   totalCharCount++;
